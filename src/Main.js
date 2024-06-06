@@ -61,7 +61,7 @@ const handleButtonClick = () => {
         }
         <div className='main-checkbox'>
           <input type='checkbox' value={context?.data.singleSash} onChange={() => { context?.setData({ ...context?.data, singleSash: !context?.data.singleSash }) }} />
-          <span>Double sash sliding window with net - Quantity- total square foot</span>
+          <span>Single sash openable window</span>
         </div>
         {
           context?.data.singleSash &&
