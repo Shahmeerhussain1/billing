@@ -1,38 +1,79 @@
-.App {
-  text-align: center;
-}
+.main{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: darkblue;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main-sub{
+  width: 600px !important;
+  background-color: white;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 18px;
+  border-radius: 20px;
+}
+
+.label {
+  text-align: left;
+  width: 95%;
+}
+.input{
+  padding: 6px 12px;
+  font-size: 18px;
+  outline: none;
+  border : 1px solid grey ;
+  border-radius: 6px;
+  width: 90%;
+}
+
+.main-checkbox{
+  padding: 6px 12px;  
+  width: 90%;
+}
+.small{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.small-sub{
+  display: flex;
+  flex-direction: column;
+}
+.small-sub > span {
+  margin-bottom: 5px;
+}
+.input-quantity{
+  padding: 6px 12px;
+  font-size: 16px;
+  outline: none;
+  border : 1px solid grey ;
+  border-radius: 6px;
+  width: 90%;
+}
+.genbtn{
+  padding: 10px 0px;
+  font-size: 16px;
+  outline: none;
+  border : 1px solid white ;
+  background-color: darkblue;
   color: white;
+  border-radius: 18px;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
-}
+@media only screen and (max-width: 600px) {
+  .main-sub{
+    width: 90% !important;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
   }
-  to {
-    transform: rotate(360deg);
+  .small{
+    flex-direction: column;
   }
 }

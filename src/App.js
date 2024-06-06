@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
-
+import {
+  createBrowserRouter,
+  RouterProvider,
+   
+} from "react-router-dom";
+import { useState } from "react";
+import Main from "./Main";
+import Pdf from "./pdf";
+import { DataContext } from "./context";
 function App() {
+
+  const [data , setData] = useState({
+    name: '',
+    contact: '',
+    doubleSash: false,
+    doubleSashQuantity: 0,
+    doubleSashSquareFoots: 0,
+    singleSash: false,
+    singleSashQuantity: 0,
+    singleSashSquareFoots: 0,
+  })
+
+
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+         <Main /> 
+      ),
+    },
+    {
+      path: "/kusbyufawe",
+      element: (
+        <Pdf /> 
+      ),
+    }
+  ])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <DataContext.Provider value={{data  ,setData}} >
+    <RouterProvider router={router} />
+    </DataContext.Provider>
+    </>
   );
 }
 
