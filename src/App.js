@@ -36,7 +36,11 @@ function App() {
     doubleSash60mm: false,
     doubleSash60mmQuantity: 0,
     doubleSash60mmSquareFoots: 0,
-    fivemmGlass : 270
+    fivemmGlass :  {
+            twoSeventy : false ,
+            fourHundred : false , 
+            sevenHundred : false
+        }
     },
    whiteData : {
     doubleSash: false,
@@ -60,7 +64,11 @@ function App() {
     doubleSash60mm: false,
     doubleSash60mmQuantity: 0,
     doubleSash60mmSquareFoots: 0,
-    fivemmGlass : 270
+    fivemmGlass :  {
+            twoSeventy : false ,
+            fourHundred : false , 
+            sevenHundred : false
+        }
    }
   })
 

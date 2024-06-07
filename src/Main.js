@@ -84,6 +84,32 @@ const handleButtonClick = () => {
   useEffect(()=>{
     console.log('context',context?.data)
   },[context])
+
+  const validity = () =>{
+    if(context?.data?.whiteColor && context?.data?.blackColor){
+        if((context?.data?.whiteData?.fivemmGlass?.twoSeventy || context?.data?.whiteData?.fivemmGlass?.fourHundred ||context?.data?.whiteData?.fivemmGlass?.sevenHundred) && (context?.data?.blackData?.fivemmGlass?.twoSeventy || context?.data?.blackData?.fivemmGlass?.fourHundred ||context?.data?.blackData?.fivemmGlass?.sevenHundred))
+            return true
+        else
+        return false
+    }
+    if(context?.data?.blackColor){
+        if(context?.data?.blackData?.fivemmGlass?.twoSeventy || context?.data?.blackData?.fivemmGlass?.fourHundred ||context?.data?.blackData?.fivemmGlass?.sevenHundred)
+            return true
+        else 
+        return false
+    }
+    if(context?.data?.whiteColor){
+        if(context?.data?.whiteData?.fivemmGlass?.twoSeventy || context?.data?.whiteData?.fivemmGlass?.fourHundred ||context?.data?.whiteData?.fivemmGlass?.sevenHundred)
+            return true
+        else
+        return false
+    }
+    
+        if(!context?.data?.blackColor && !context?.data?.whiteColor)
+            return false
+   
+
+  }
  
   return (
    
@@ -447,7 +473,7 @@ const handleButtonClick = () => {
         </div>
 
         </div>
-      <button className='genbtn' onClick={()=>{handleButtonClick()}}>Next</button>
+      <button className='genbtn' style={{pointerEvents : validity() ?'auto':'none'}} onClick={()=>{handleButtonClick()}}>Next</button>
       </div>
       <div>
       </div>

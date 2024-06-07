@@ -10,28 +10,31 @@ const Pdf = () => {
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const year = date.getFullYear();
-        return `${month}/${day}/${year}`;
+        return `${day}/${month}/${year}`;
     };
     useEffect(() => {
         console.log('contextFromPdf', contextFromPdf)
 
     }, [contextFromPdf])
-    const onload = () => {
-        toPDF()
-    }
-    useEffect(() => {
-        onload()
-    }, [])
+
 
     function mm5() {
         return contextFromPdf?.data?.blackData?.fivemmGlass?.twoSeventy ? 270 :
             contextFromPdf?.data?.blackData?.fivemmGlass?.fourHundred ? 410 :
                 contextFromPdf?.data?.blackData?.fivemmGlass?.sevenHundred ? 700 : 0
     }
+    function mm5white() {
+        return contextFromPdf?.data?.whiteData?.fivemmGlass?.twoSeventy ? 270 :
+            contextFromPdf?.data?.whiteData?.fivemmGlass?.fourHundred ? 410 :
+                contextFromPdf?.data?.whiteData?.fivemmGlass?.sevenHundred ? 700 : 0
+    }
 
 
     return (
         <>
+            <div style={{ width: '1200px', display: 'flex', justifyContent: 'flex-end' }}>
+                <button onClick={() => { toPDF() }} style={{ padding: '16px' , fontWeight : 'bold', color: 'white', backgroundColor: 'darkblue', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '150px !important', borderRadius: '12px !important', cursor: 'pointer !important' , border : 'none' , outline : 'none' }}>Download</button>
+            </div>
             <div className="App">
 
                 <div ref={targetRef}>
@@ -471,10 +474,8 @@ const Pdf = () => {
                                                     <>
                                                         <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.whiteData?.doubleSashQuantity + +contextFromPdf?.data?.whiteData?.singleSashQuantity + +contextFromPdf?.data?.whiteData?.twoSashQuantity + +contextFromPdf?.data?.whiteData?.fixWindowQuantity + +contextFromPdf?.data?.whiteData?.openableVentilatorQuantity + +contextFromPdf?.data?.whiteData?.doubleSash80mmQuantity + +contextFromPdf?.data?.whiteData?.doubleSash60mmQuantity} </div>
                                                         <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots} </div>
-                                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.fivemmGlass?.twoSeventy ? 270 :
-                                                            contextFromPdf?.data?.whiteData?.fivemmGlass?.fourHundred ? 410 :
-                                                                contextFromPdf?.data?.whiteData?.fivemmGlass?.sevenHundred ? 700 : 0} </div>
-                                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots) * mm5()} </div>
+                                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{mm5white()} </div>
+                                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots) * mm5white()} </div>
                                                     </>
                                                 }
                                             </div>
