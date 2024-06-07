@@ -12,16 +12,22 @@ const Pdf = () => {
         const year = date.getFullYear();
         return `${month}/${day}/${year}`;
     };
-    useEffect(()=>{
-    console.log('contextFromPdf',contextFromPdf)
+    useEffect(() => {
+        console.log('contextFromPdf', contextFromPdf)
 
-},[contextFromPdf])
+    }, [contextFromPdf])
     const onload = () => {
         toPDF()
     }
     useEffect(() => {
         onload()
     }, [])
+
+    function mm5() {
+        return contextFromPdf?.data?.blackData?.fivemmGlass?.twoSeventy ? 270 :
+            contextFromPdf?.data?.blackData?.fivemmGlass?.fourHundred ? 410 :
+                contextFromPdf?.data?.blackData?.fivemmGlass?.sevenHundred ? 700 : 0
+    }
 
 
     return (
@@ -54,243 +60,635 @@ const Pdf = () => {
                             </div>
 
                             {/* FIRST BLOCK */}
-                            <div style={{ width: '100%', display: 'flex', marginTop: '30px', border: '1px solid black' }}>
-                                <div style={{ width: '60%' }}>
-                                    <div style={{ fontSize: '18px', fontWeight: 'bold', backgroundColor: 'grey', height: '25px', alignItems: 'center', display: 'flex' }}>Description ( Pamo / Wizplaz in white colour )</div>
-                                    {contextFromPdf?.data?.doubleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash sliding window with net</div>}
-                                    {contextFromPdf?.data?.singleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Single sash openable window</div>}
-                                    <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>5mm plain glass </div>
+                            {contextFromPdf?.data?.blackColor &&
+                                <>
+                                    <div style={{ width: '100%', display: 'flex', marginTop: '30px', border: '1px solid black' }}>
+                                        <div style={{ width: '60%' }}>
+                                            <div style={{ fontSize: '18px', fontWeight: 'bold', backgroundColor: 'grey', height: '25px', alignItems: 'center', display: 'flex' }}>Description ( Turk profile in black colour )</div>
+                                            {contextFromPdf?.data?.blackData?.doubleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash sliding window with net</div>}
+                                            {contextFromPdf?.data?.blackData?.singleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Single sash openable window</div>}
+                                            {contextFromPdf?.data?.blackData?.twoSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Two sash sliding window with Centre Fix and two net sash</div>}
+                                            {contextFromPdf?.data?.blackData?.openableVentilator && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Openable ventilator</div>}
+                                            {contextFromPdf?.data?.blackData?.fixWindow && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Fix window</div>}
+                                            {contextFromPdf?.data?.blackData?.doubleSash80mm && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash sliding window with net ( 80mm frame and 55mm sash )</div>}
+                                            {contextFromPdf?.data?.blackData?.doubleSash60mm && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash openable window ( 60mm frame and 60mm sash )</div>}
+                                            {(contextFromPdf?.data?.blackData?.fivemmGlass?.twoSeventy ||
+                                                contextFromPdf?.data?.blackData?.fivemmGlass?.fourHundred ||
+                                                contextFromPdf?.data?.blackData?.fivemmGlass?.sevenHundred) &&
+                                                <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>
+                                                    {contextFromPdf?.data?.blackData?.fivemmGlass?.twoSeventy ? '5mm plain glass' :
+                                                        contextFromPdf?.data?.blackData?.fivemmGlass?.fourHundred ? '5mm plain Tempered glass' :
+                                                            contextFromPdf?.data?.blackData?.fivemmGlass?.sevenHundred ? '5mm plain glass + double glaze 8mm spacer + 5mm plain glass + georgion bar' : ''}
+                                                </div>
+                                            }
 
-                                    <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Installation charges </div>
-                                    <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Silicon charges for filling the gap and finishing </div>
-                                    <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Transport charges per carriage  </div>
-                                </div>
+                                            <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Installation charges </div>
+                                            <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Silicon charges for filling the gap and finishing </div>
+                                            <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Transport charges per carriage  </div>
+                                        </div>
 
-                                <div style={{ width: '40%', border: '1px solid black', borderTop: '0px', borderBottom: '0px', borderRight: '0px' }}>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400' }}>Quantity(Qty) </div>
-                                        <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total(Sft)  </div>
-                                        <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Rate. Sft </div>
-                                        <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total amount </div>
+                                        <div style={{ width: '40%', border: '1px solid black', borderTop: '0px', borderBottom: '0px', borderRight: '0px' }}>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400' }}>Quantity(Qty) </div>
+                                                <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total(Sft)  </div>
+                                                <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Rate. Sft </div>
+                                                <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total amount </div>
+                                            </div>
+
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.doubleSash && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSashQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSashSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2100 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSashSquareFoots * 2100}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.singleSash && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.singleSashQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.singleSashSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2200 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.singleSashSquareFoots * 2200}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.twoSash && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.twoSashQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.twoSashSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2600 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.twoSashSquareFoots * 2600}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.openableVentilator && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.openableVentilatorQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>1650 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots * 1650}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.fixWindow && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.fixWindowQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.fixWindowSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>900 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.fixWindowSquareFoots * 900}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.doubleSash80mm && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSash80mmQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2100 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots * 2100}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.doubleSash60mm && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSash60mmQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2200 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots * 2200}</div></>}
+                                            </div>
+
+                                            {/* 5mm glass */}
+
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {
+                                                    (contextFromPdf?.data?.blackData?.fivemmGlass?.twoSeventy ||
+                                                        contextFromPdf?.data?.blackData?.fivemmGlass?.fourHundred ||
+                                                        contextFromPdf?.data?.blackData?.fivemmGlass?.sevenHundred) &&
+                                                    <>
+                                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.blackData?.doubleSashQuantity + +contextFromPdf?.data?.blackData?.singleSashQuantity + +contextFromPdf?.data?.blackData?.twoSashQuantity + +contextFromPdf?.data?.blackData?.fixWindowQuantity + +contextFromPdf?.data?.blackData?.openableVentilatorQuantity + +contextFromPdf?.data?.blackData?.doubleSash80mmQuantity + +contextFromPdf?.data?.blackData?.doubleSash60mmQuantity} </div>
+                                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.blackData?.doubleSashSquareFoots + +contextFromPdf?.data?.blackData?.singleSashSquareFoots + +contextFromPdf?.data?.blackData?.twoSashSquareFoots + +contextFromPdf?.data?.blackData?.fixWindowSquareFoots + +contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots} </div>
+                                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.fivemmGlass?.twoSeventy ? 270 :
+                                                            contextFromPdf?.data?.blackData?.fivemmGlass?.fourHundred ? 410 :
+                                                                contextFromPdf?.data?.blackData?.fivemmGlass?.sevenHundred ? 700 : 0} </div>
+                                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.blackData?.doubleSashSquareFoots + +contextFromPdf?.data?.blackData?.singleSashSquareFoots + +contextFromPdf?.data?.blackData?.twoSashSquareFoots + +contextFromPdf?.data?.blackData?.fixWindowSquareFoots + +contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots) * mm5()} </div>
+                                                    </>
+                                                }
+                                            </div>
+
+
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.blackData?.doubleSashQuantity + +contextFromPdf?.data?.blackData?.singleSashQuantity + +contextFromPdf?.data?.blackData?.twoSashQuantity + +contextFromPdf?.data?.blackData?.fixWindowQuantity + +contextFromPdf?.data?.blackData?.openableVentilatorQuantity + +contextFromPdf?.data?.blackData?.doubleSash80mmQuantity + +contextFromPdf?.data?.blackData?.doubleSash60mmQuantity} </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.blackData?.doubleSashSquareFoots + +contextFromPdf?.data?.blackData?.singleSashSquareFoots + +contextFromPdf?.data?.blackData?.twoSashSquareFoots + +contextFromPdf?.data?.blackData?.fixWindowSquareFoots + +contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots} </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>50 </div>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.blackData?.doubleSashSquareFoots + +contextFromPdf?.data?.blackData?.singleSashSquareFoots + +contextFromPdf?.data?.blackData?.twoSashSquareFoots + +contextFromPdf?.data?.blackData?.fixWindowSquareFoots + +contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots) * 50}</div>
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>5000</div>
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>  </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>7000</div>
+                                            </div>
+
+                                        </div>
                                     </div>
 
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        {contextFromPdf?.data?.doubleSash && <>      
-                                           <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.doubleSashQuantity} </div>
-                                            <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.doubleSashSquareFoots} </div>
-                                            <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>800 </div>
-                                            <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.doubleSashSquareFoots*800}</div></>}
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                    {contextFromPdf?.data?.singleSash && <>      
-                                           <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.singleSashQuantity} </div>
-                                            <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.singleSashSquareFoots} </div>
-                                            <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>850 </div>
-                                            <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.singleSashSquareFoots * 850}</div></>}
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.doubleSashQuantity + +contextFromPdf?.data?.singleSashQuantity} </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots} </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>270 </div>
-                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots) * 270}</div>
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.doubleSashQuantity + +contextFromPdf?.data?.singleSashQuantity}</div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots}   </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>50 </div>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots) * 50}</div>
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>1000</div>
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>  </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>5000</div>
-                                    </div>
+                                    <div style={{ width: '100%', display: 'flex', }}>
+                                        <div style={{ width: '60%' }}>
 
-                                </div>
-                            </div>
+                                        </div>
 
-                            <div style={{ width: '100%', display: 'flex', }}>
-                                <div style={{ width: '60%' }}>
+                                        <div style={{ width: '40%', border: '1px solid black', borderTop: 'none' }}>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '70%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold' }}>Total amount </div>
+                                                <div style={{ width: '30%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold', borderLeft: '1px solid black' }}>{(+contextFromPdf?.data?.blackData?.doubleSashSquareFoots + +contextFromPdf?.data?.blackData?.singleSashSquareFoots + +contextFromPdf?.data?.blackData?.twoSashSquareFoots + +contextFromPdf?.data?.blackData?.fixWindowSquareFoots + +contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots) * 50
+                                                    + 12000
+                                                    + (+contextFromPdf?.data?.blackData?.doubleSashSquareFoots + +contextFromPdf?.data?.blackData?.singleSashSquareFoots + +contextFromPdf?.data?.blackData?.twoSashSquareFoots + +contextFromPdf?.data?.blackData?.fixWindowSquareFoots + +contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots) * mm5()
+                                                    + contextFromPdf?.data?.blackData?.singleSashSquareFoots * 2200
+                                                    + contextFromPdf?.data?.blackData?.doubleSashSquareFoots * 2100
 
-                                </div>
+                                                    + contextFromPdf?.data?.blackData?.twoSashSquareFoots * 2600
+                                                    + contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots * 1650
+                                                    + contextFromPdf?.data?.blackData?.fixWindowSquareFoots * 900
+                                                    + contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots * 2200
+                                                    + contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots * 2100
 
-                                <div style={{ width: '40%', border: '1px solid black', borderTop: 'none' }}>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '70%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold' }}>Total amount </div>
-                                        <div style={{ width: '30%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold', borderLeft: '1px solid black' }}>{(+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots) * 50 + 6000 + (+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots) * 270 + contextFromPdf?.data?.singleSashSquareFoots * 850 + contextFromPdf?.data?.doubleSashSquareFoots*800 } </div>
+                                                } </div>
+                                            </div>
+
+
+
+                                        </div>
                                     </div>
 
 
+                                    {/* SECOND BLOCK */}
+                                    <div style={{ width: '100%', display: 'flex', marginTop: '30px', border: '1px solid black' }}>
+                                        <div style={{ width: '60%' }}>
+                                            <div style={{ fontSize: '18px', fontWeight: 'bold', backgroundColor: 'grey', height: '25px', alignItems: 'center', display: 'flex' }}>Description ( Skypen in black colour )</div>
+                                            {contextFromPdf?.data?.blackData?.doubleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash sliding window with net</div>}
+                                            {contextFromPdf?.data?.blackData?.singleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Single sash openable window</div>}
+                                            {contextFromPdf?.data?.blackData?.twoSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Two sash sliding window with Centre Fix and two net sash</div>}
+                                            {contextFromPdf?.data?.blackData?.openableVentilator && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Openable ventilator</div>}
+                                            {contextFromPdf?.data?.blackData?.fixWindow && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Fix window</div>}
+                                            {contextFromPdf?.data?.blackData?.doubleSash80mm && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash sliding window with net ( 80mm frame and 55mm sash )</div>}
+                                            {contextFromPdf?.data?.blackData?.doubleSash60mm && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash openable window ( 60mm frame and 60mm sash )</div>}
+                                            {(contextFromPdf?.data?.blackData?.fivemmGlass?.twoSeventy ||
+                                                contextFromPdf?.data?.blackData?.fivemmGlass?.fourHundred ||
+                                                contextFromPdf?.data?.blackData?.fivemmGlass?.sevenHundred) &&
+                                                <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>
+                                                    {contextFromPdf?.data?.blackData?.fivemmGlass?.twoSeventy ? '5mm plain glass' :
+                                                        contextFromPdf?.data?.blackData?.fivemmGlass?.fourHundred ? '5mm plain Tempered glass' :
+                                                            contextFromPdf?.data?.blackData?.fivemmGlass?.sevenHundred ? '5mm plain glass + double glaze 8mm spacer + 5mm plain glass + georgion bar' : ''}
+                                                </div>
+                                            }
 
-                                </div>
-                            </div>
+                                            <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Installation charges </div>
+                                            <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Silicon charges for filling the gap and finishing </div>
+                                            <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Transport charges per carriage  </div>
+                                        </div>
+
+                                        <div style={{ width: '40%', border: '1px solid black', borderTop: '0px', borderBottom: '0px', borderRight: '0px' }}>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400' }}>Quantity(Qty) </div>
+                                                <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total(Sft)  </div>
+                                                <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Rate. Sft </div>
+                                                <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total amount </div>
+                                            </div>
+
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.doubleSash && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSashQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSashSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2300 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSashSquareFoots * 2300}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.singleSash && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.singleSashQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.singleSashSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2400 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.singleSashSquareFoots * 2400}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.twoSash && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.twoSashQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.twoSashSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2750 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.twoSashSquareFoots * 2750}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.openableVentilator && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.openableVentilatorQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>1700 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots * 1700}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.fixWindow && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.fixWindowQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.fixWindowSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>1050 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.fixWindowSquareFoots * 1050}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.doubleSash80mm && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSash80mmQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2300 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots * 2300}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.blackData?.doubleSash60mm && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSash60mmQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2400 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots * 2400}</div></>}
+                                            </div>
+
+                                            {/* 5mm glass */}
+
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {
+                                                    (contextFromPdf?.data?.blackData?.fivemmGlass?.twoSeventy ||
+                                                        contextFromPdf?.data?.blackData?.fivemmGlass?.fourHundred ||
+                                                        contextFromPdf?.data?.blackData?.fivemmGlass?.sevenHundred) &&
+                                                    <>
+                                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.blackData?.doubleSashQuantity + +contextFromPdf?.data?.blackData?.singleSashQuantity + +contextFromPdf?.data?.blackData?.twoSashQuantity + +contextFromPdf?.data?.blackData?.fixWindowQuantity + +contextFromPdf?.data?.blackData?.openableVentilatorQuantity + +contextFromPdf?.data?.blackData?.doubleSash80mmQuantity + +contextFromPdf?.data?.blackData?.doubleSash60mmQuantity} </div>
+                                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.blackData?.doubleSashSquareFoots + +contextFromPdf?.data?.blackData?.singleSashSquareFoots + +contextFromPdf?.data?.blackData?.twoSashSquareFoots + +contextFromPdf?.data?.blackData?.fixWindowSquareFoots + +contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots} </div>
+                                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{mm5()} </div>
+                                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.blackData?.doubleSashSquareFoots + +contextFromPdf?.data?.blackData?.singleSashSquareFoots + +contextFromPdf?.data?.blackData?.twoSashSquareFoots + +contextFromPdf?.data?.blackData?.fixWindowSquareFoots + +contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots) * mm5()} </div>
+                                                    </>
+                                                }
+                                            </div>
 
 
-                            {/* SECOND BLOCK */}
-                            <div style={{ width: '100%', display: 'flex', marginTop: '30px', border: '1px solid black' }}>
-                                <div style={{ width: '60%' }}>
-                                    <div style={{ fontSize: '18px', fontWeight: 'bold', backgroundColor: 'grey', height: '25px', alignItems: 'center', display: 'flex' }}>Description ( Turk profile in white colour )</div>
-                                    {contextFromPdf?.data?.doubleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash sliding window with net</div>}
-                                    {contextFromPdf?.data?.singleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Single sash openable window</div>}
-                                    <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>5mm plain glass </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.blackData?.doubleSashQuantity + +contextFromPdf?.data?.blackData?.singleSashQuantity + +contextFromPdf?.data?.blackData?.twoSashQuantity + +contextFromPdf?.data?.blackData?.fixWindowQuantity + +contextFromPdf?.data?.blackData?.openableVentilatorQuantity + +contextFromPdf?.data?.blackData?.doubleSash80mmQuantity + +contextFromPdf?.data?.blackData?.doubleSash60mmQuantity} </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.blackData?.doubleSashSquareFoots + +contextFromPdf?.data?.blackData?.singleSashSquareFoots + +contextFromPdf?.data?.blackData?.twoSashSquareFoots + +contextFromPdf?.data?.blackData?.fixWindowSquareFoots + +contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots} </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>50 </div>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.blackData?.doubleSashSquareFoots + +contextFromPdf?.data?.blackData?.singleSashSquareFoots + +contextFromPdf?.data?.blackData?.twoSashSquareFoots + +contextFromPdf?.data?.blackData?.fixWindowSquareFoots + +contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots) * 50}</div>
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>5000</div>
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>  </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>7000</div>
+                                            </div>
 
-                                    <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Installation charges </div>
-                                    <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Silicon charges for filling the gap and finishing </div>
-                                    <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Transport charges per carriage  </div>
-                                </div>
-
-                                <div style={{ width: '40%', border: '1px solid black', borderTop: '0px', borderBottom: '0px', borderRight: '0px' }}>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400' }}>Quantity(Qty) </div>
-                                        <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total(Sft)  </div>
-                                        <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Rate. Sft </div>
-                                        <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total amount </div>
+                                        </div>
                                     </div>
 
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        {contextFromPdf?.data?.doubleSash && <>      
-                                           <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.doubleSashQuantity} </div>
-                                            <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.doubleSashSquareFoots} </div>
-                                            <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>900 </div>
-                                            <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.doubleSashSquareFoots*900}</div></>}
+                                    <div style={{ width: '100%', display: 'flex', }}>
+                                        <div style={{ width: '60%' }}>
+
+                                        </div>
+
+
+                                        <div style={{ width: '40%', border: '1px solid black', borderTop: 'none' }}>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '70%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold' }}>Total amount </div>
+                                                <div style={{ width: '30%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold', borderLeft: '1px solid black' }}>
+                                                    {
+                                                        (+contextFromPdf?.data?.blackData?.doubleSashSquareFoots + +contextFromPdf?.data?.blackData?.singleSashSquareFoots + +contextFromPdf?.data?.blackData?.twoSashSquareFoots + +contextFromPdf?.data?.blackData?.fixWindowSquareFoots + +contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots) * 50
+                                                        + 12000
+
+                                                        + (+contextFromPdf?.data?.blackData?.singleSashSquareFoots * 2400)
+                                                        + (+contextFromPdf?.data?.blackData?.doubleSashSquareFoots * 2300)
+
+                                                        + (+contextFromPdf?.data?.blackData?.twoSashSquareFoots * 2750)
+                                                        + (+contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots * 1700)
+                                                        + (+contextFromPdf?.data?.blackData?.fixWindowSquareFoots * 1050)
+                                                        + (+contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots * 2400)
+                                                        + (+contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots * 2300)
+
+                                                        + (+contextFromPdf?.data?.blackData?.doubleSashSquareFoots + +contextFromPdf?.data?.blackData?.singleSashSquareFoots + +contextFromPdf?.data?.blackData?.twoSashSquareFoots + +contextFromPdf?.data?.blackData?.fixWindowSquareFoots + +contextFromPdf?.data?.blackData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.blackData?.doubleSash60mmSquareFoots) * mm5()
+                                                    }
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
                                     </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                    {contextFromPdf?.data?.singleSash && <>      
-                                           <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.singleSashQuantity} </div>
-                                            <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.singleSashSquareFoots} </div>
-                                            <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>950 </div>
-                                            <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.singleSashSquareFoots * 950}</div></>}
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.doubleSashQuantity + +contextFromPdf?.data?.singleSashQuantity} </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots} </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>270 </div>
-                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots) * 270}</div>
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.doubleSashQuantity + +contextFromPdf?.data?.singleSashQuantity}</div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots}   </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>50 </div>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots) * 50}</div>
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>1000</div>
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>  </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>5000</div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div style={{ width: '100%', display: 'flex', }}>
-                                <div style={{ width: '60%' }}>
-
-                                </div>
-
-                                <div style={{ width: '40%', border: '1px solid black', borderTop: 'none' }}>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '70%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold' }}>Total amount </div>
-                                        <div style={{ width: '30%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold', borderLeft: '1px solid black' }}>{(+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots) * 50 + 6000 + (+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots) * 270 + contextFromPdf?.data?.singleSashSquareFoots * 950 + contextFromPdf?.data?.doubleSashSquareFoots*900 } </div>
-                                    </div>
-
-
-
-                                </div>
-                            </div>
-
+                                </>
+                            }
                             {/* THIRD BLOCK */}
+                            {
 
-                            <div style={{ width: '100%', display: 'flex', marginTop: '30px', border: '1px solid black' }}>
-                                <div style={{ width: '60%' }}>
-                                    <div style={{ fontSize: '18px', fontWeight: 'bold', backgroundColor: 'grey', height: '25px', alignItems: 'center', display: 'flex' }}>Description ( Eurofile / skypen in white colour )</div>
-                                    {contextFromPdf?.data?.doubleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash sliding window with net</div>}
-                                    {contextFromPdf?.data?.singleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Single sash openable window</div>}
-                                    <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>5mm plain glass </div>
+                                contextFromPdf?.data?.whiteColor &&
+                                <>
 
-                                    <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Installation charges </div>
-                                    <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Silicon charges for filling the gap and finishing </div>
-                                    <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Transport charges per carriage  </div>
-                                </div>
+                                    <div style={{ width: '100%', display: 'flex', marginTop: '30px', border: '1px solid black' }}>
+                                        <div style={{ width: '60%' }}>
+                                            <div style={{ fontSize: '18px', fontWeight: 'bold', backgroundColor: 'grey', height: '25px', alignItems: 'center', display: 'flex' }}>Description ( Turk profile in White colour )</div>
+                                            {contextFromPdf?.data?.whiteData?.doubleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash sliding window with net</div>}
+                                            {contextFromPdf?.data?.whiteData?.singleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Single sash openable window</div>}
+                                            {contextFromPdf?.data?.whiteData?.twoSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Two sash sliding window with Centre Fix and two net sash</div>}
+                                            {contextFromPdf?.data?.whiteData?.openableVentilator && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Openable ventilator</div>}
+                                            {contextFromPdf?.data?.whiteData?.fixWindow && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Fix window</div>}
+                                            {contextFromPdf?.data?.whiteData?.doubleSash80mm && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash sliding window with net ( 80mm frame and 55mm sash )</div>}
+                                            {contextFromPdf?.data?.whiteData?.doubleSash60mm && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash openable window ( 60mm frame and 60mm sash )</div>}
+                                            {(contextFromPdf?.data?.whiteData?.fivemmGlass?.twoSeventy ||
+                                                contextFromPdf?.data?.whiteData?.fivemmGlass?.fourHundred ||
+                                                contextFromPdf?.data?.whiteData?.fivemmGlass?.sevenHundred) &&
+                                                <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>
+                                                    {contextFromPdf?.data?.whiteData?.fivemmGlass?.twoSeventy ? '5mm plain glass' :
+                                                        contextFromPdf?.data?.whiteData?.fivemmGlass?.fourHundred ? '5mm plain Tempered glass' :
+                                                            contextFromPdf?.data?.whiteData?.fivemmGlass?.sevenHundred ? '5mm plain glass + double glaze 8mm spacer + 5mm plain glass + georgion bar' : ''}
+                                                </div>
+                                            }
 
-                                <div style={{ width: '40%', border: '1px solid black', borderTop: '0px', borderBottom: '0px', borderRight: '0px' }}>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400' }}>Quantity(Qty) </div>
-                                        <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total(Sft)  </div>
-                                        <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Rate. Sft </div>
-                                        <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total amount </div>
+                                            <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Installation charges </div>
+                                            <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Silicon charges for filling the gap and finishing </div>
+                                            <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Transport charges per carriage  </div>
+                                        </div>
+
+                                        <div style={{ width: '40%', border: '1px solid black', borderTop: '0px', borderBottom: '0px', borderRight: '0px' }}>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400' }}>Quantity(Qty) </div>
+                                                <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total(Sft)  </div>
+                                                <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Rate. Sft </div>
+                                                <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total amount </div>
+                                            </div>
+
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.doubleSash && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSashQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSashSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>1100 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSashSquareFoots * 1100}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.singleSash && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.singleSashQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.singleSashSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2200 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.singleSashSquareFoots * 2200}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.twoSash && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.twoSashQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.twoSashSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2600 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.twoSashSquareFoots * 2600}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.openableVentilator && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.openableVentilatorQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>1650 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots * 1650}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.fixWindow && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.fixWindowQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.fixWindowSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>900 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.fixWindowSquareFoots * 900}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.doubleSash80mm && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSash80mmQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2100 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots * 2100}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.doubleSash60mm && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSash60mmQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2200 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots * 2200}</div></>}
+                                            </div>
+
+                                            {/* 5mm glass */}
+
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {
+                                                    (contextFromPdf?.data?.whiteData?.fivemmGlass?.twoSeventy ||
+                                                        contextFromPdf?.data?.whiteData?.fivemmGlass?.fourHundred ||
+                                                        contextFromPdf?.data?.whiteData?.fivemmGlass?.sevenHundred) &&
+                                                    <>
+                                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.whiteData?.doubleSashQuantity + +contextFromPdf?.data?.whiteData?.singleSashQuantity + +contextFromPdf?.data?.whiteData?.twoSashQuantity + +contextFromPdf?.data?.whiteData?.fixWindowQuantity + +contextFromPdf?.data?.whiteData?.openableVentilatorQuantity + +contextFromPdf?.data?.whiteData?.doubleSash80mmQuantity + +contextFromPdf?.data?.whiteData?.doubleSash60mmQuantity} </div>
+                                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots} </div>
+                                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.fivemmGlass?.twoSeventy ? 270 :
+                                                            contextFromPdf?.data?.whiteData?.fivemmGlass?.fourHundred ? 410 :
+                                                                contextFromPdf?.data?.whiteData?.fivemmGlass?.sevenHundred ? 700 : 0} </div>
+                                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots) * mm5()} </div>
+                                                    </>
+                                                }
+                                            </div>
+
+
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.whiteData?.doubleSashQuantity + +contextFromPdf?.data?.whiteData?.singleSashQuantity + +contextFromPdf?.data?.whiteData?.twoSashQuantity + +contextFromPdf?.data?.whiteData?.fixWindowQuantity + +contextFromPdf?.data?.whiteData?.openableVentilatorQuantity + +contextFromPdf?.data?.whiteData?.doubleSash80mmQuantity + +contextFromPdf?.data?.whiteData?.doubleSash60mmQuantity} </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots} </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>50 </div>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots) * 50}</div>
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>5000</div>
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>  </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>7000</div>
+                                            </div>
+
+                                        </div>
                                     </div>
 
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        {contextFromPdf?.data?.doubleSash && <>      
-                                           <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.doubleSashQuantity} </div>
-                                            <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.doubleSashSquareFoots} </div>
-                                            <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>950 </div>
-                                            <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.doubleSashSquareFoots*950}</div></>}
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                    {contextFromPdf?.data?.singleSash && <>      
-                                           <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.singleSashQuantity} </div>
-                                            <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.singleSashSquareFoots} </div>
-                                            <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>1000 </div>
-                                            <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.singleSashSquareFoots * 1000}</div></>}
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.doubleSashQuantity + +contextFromPdf?.data?.singleSashQuantity} </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots} </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>270 </div>
-                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots) * 270}</div>
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.doubleSashQuantity + +contextFromPdf?.data?.singleSashQuantity}</div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots}   </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>50 </div>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots) * 50}</div>
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>1000</div>
-                                    </div>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>  </div>
-                                        <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
-                                        <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>5000</div>
-                                    </div>
+                                    <div style={{ width: '100%', display: 'flex', }}>
+                                        <div style={{ width: '60%' }}>
 
-                                </div>
-                            </div>
+                                        </div>
 
-                            <div style={{ width: '100%', display: 'flex', }}>
-                                <div style={{ width: '60%' }}>
+                                        <div style={{ width: '40%', border: '1px solid black', borderTop: 'none' }}>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '70%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold' }}>Total amount </div>
+                                                <div style={{ width: '30%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold', borderLeft: '1px solid black' }}>{(+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots) * 50
+                                                    + 12000
+                                                    + (+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots) * mm5()
+                                                    + contextFromPdf?.data?.whiteData?.singleSashSquareFoots * 2200
+                                                    + contextFromPdf?.data?.whiteData?.doubleSashSquareFoots * 1100
 
-                                </div>
+                                                    + contextFromPdf?.data?.whiteData?.twoSashSquareFoots * 2600
+                                                    + contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots * 1650
+                                                    + contextFromPdf?.data?.whiteData?.fixWindowSquareFoots * 900
+                                                    + contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots * 2200
+                                                    + contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots * 2100
 
-                                <div style={{ width: '40%', border: '1px solid black', borderTop: 'none' }}>
-                                    <div style={{ width: '100%', display: 'flex' }}>
-                                        <div style={{ width: '70%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold' }}>Total amount </div>
-                                        <div style={{ width: '30%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold', borderLeft: '1px solid black' }}>{(+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots) * 50 + 6000 + (+contextFromPdf?.data?.singleSashSquareFoots + +contextFromPdf?.data?.doubleSashSquareFoots) * 270 + contextFromPdf?.data?.singleSashSquareFoots * 1000 + contextFromPdf?.data?.doubleSashSquareFoots*950 } </div>
-                                    </div>
+                                                } </div>
+                                            </div>
 
 
 
-                                </div>
-                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    {/* FOURTH BLOCK */}
+
+                                    <div style={{ width: '100%', display: 'flex', marginTop: '30px', border: '1px solid black' }}>
+                                        <div style={{ width: '60%' }}>
+                                            <div style={{ fontSize: '18px', fontWeight: 'bold', backgroundColor: 'grey', height: '25px', alignItems: 'center', display: 'flex' }}>Description ( Skypen in White colour )</div>
+                                            {contextFromPdf?.data?.whiteData?.doubleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash sliding window with net</div>}
+                                            {contextFromPdf?.data?.whiteData?.singleSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Single sash openable window</div>}
+                                            {contextFromPdf?.data?.whiteData?.twoSash && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Two sash sliding window with Centre Fix and two net sash</div>}
+                                            {contextFromPdf?.data?.whiteData?.openableVentilator && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Openable ventilator</div>}
+                                            {contextFromPdf?.data?.whiteData?.fixWindow && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Fix window</div>}
+                                            {contextFromPdf?.data?.whiteData?.doubleSash80mm && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash sliding window with net ( 80mm frame and 55mm sash )</div>}
+                                            {contextFromPdf?.data?.whiteData?.doubleSash60mm && <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Double sash openable window ( 60mm frame and 60mm sash )</div>}
+                                            {(contextFromPdf?.data?.whiteData?.fivemmGlass?.twoSeventy ||
+                                                contextFromPdf?.data?.whiteData?.fivemmGlass?.fourHundred ||
+                                                contextFromPdf?.data?.whiteData?.fivemmGlass?.sevenHundred) &&
+                                                <div style={{ paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>
+                                                    {contextFromPdf?.data?.whiteData?.fivemmGlass?.twoSeventy ? '5mm plain glass' :
+                                                        contextFromPdf?.data?.whiteData?.fivemmGlass?.fourHundred ? '5mm plain Tempered glass' :
+                                                            contextFromPdf?.data?.whiteData?.fivemmGlass?.sevenHundred ? '5mm plain glass + double glaze 8mm spacer + 5mm plain glass + georgion bar' : ''}
+                                                </div>
+                                            }
+
+                                            <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Installation charges </div>
+                                            <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Silicon charges for filling the gap and finishing </div>
+                                            <div style={{ backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', }}>Transport charges per carriage  </div>
+                                        </div>
+
+                                        <div style={{ width: '40%', border: '1px solid black', borderTop: '0px', borderBottom: '0px', borderRight: '0px' }}>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400' }}>Quantity(Qty) </div>
+                                                <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total(Sft)  </div>
+                                                <div style={{ width: '20%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Rate. Sft </div>
+                                                <div style={{ width: '30%', backgroundColor: 'gray', display: 'flex', height: '25px', alignItems: 'center', paddingLeft: '2px', fontSize: '12px', fontWeight: '400', borderLeft: '1px solid black' }}>Total amount </div>
+                                            </div>
+
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.doubleSash && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSashQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSashSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>1100 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSashSquareFoots * 1100}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.singleSash && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.singleSashQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.singleSashSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2400 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.singleSashSquareFoots * 2400}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.twoSash && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.twoSashQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.twoSashSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2750 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.twoSashSquareFoots * 2750}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.openableVentilator && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.openableVentilatorQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>1700 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots * 1700}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.fixWindow && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.fixWindowQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.fixWindowSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>1050 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.fixWindowSquareFoots * 1050}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.doubleSash80mm && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSash80mmQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2300 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots * 2300}</div></>}
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {contextFromPdf?.data?.whiteData?.doubleSash60mm && <>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSash60mmQuantity} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots} </div>
+                                                    <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>2400 </div>
+                                                    <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots * 2400}</div></>}
+                                            </div>
+
+                                            {/* 5mm glass */}
+
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                {
+                                                    (contextFromPdf?.data?.whiteData?.fivemmGlass?.twoSeventy ||
+                                                        contextFromPdf?.data?.whiteData?.fivemmGlass?.fourHundred ||
+                                                        contextFromPdf?.data?.whiteData?.fivemmGlass?.sevenHundred) &&
+                                                    <>
+                                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.whiteData?.doubleSashQuantity + +contextFromPdf?.data?.whiteData?.singleSashQuantity + +contextFromPdf?.data?.whiteData?.twoSashQuantity + +contextFromPdf?.data?.whiteData?.fixWindowQuantity + +contextFromPdf?.data?.whiteData?.openableVentilatorQuantity + +contextFromPdf?.data?.whiteData?.doubleSash80mmQuantity + +contextFromPdf?.data?.whiteData?.doubleSash60mmQuantity} </div>
+                                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots} </div>
+                                                        <div style={{ width: '20%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{mm5()} </div>
+                                                        <div style={{ width: '30%', fontWeight: 'bold', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots) * mm5()} </div>
+                                                    </>
+                                                }
+                                            </div>
+
+
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.whiteData?.doubleSashQuantity + +contextFromPdf?.data?.whiteData?.singleSashQuantity + +contextFromPdf?.data?.whiteData?.twoSashQuantity + +contextFromPdf?.data?.whiteData?.fixWindowQuantity + +contextFromPdf?.data?.whiteData?.openableVentilatorQuantity + +contextFromPdf?.data?.whiteData?.doubleSash80mmQuantity + +contextFromPdf?.data?.whiteData?.doubleSash60mmQuantity} </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots} </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>50 </div>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>{(+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots) * 50}</div>
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>5000</div>
+                                            </div>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>  </div>
+                                                <div style={{ width: '20%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}> </div>
+                                                <div style={{ width: '30%', fontWeight: 'bold', display: 'flex', backgroundColor: 'lightgray', paddingLeft: '2px', height: '25px', alignItems: 'center', display: 'flex', fontSize: '16px' }}>7000</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div style={{ width: '100%', display: 'flex', }}>
+                                        <div style={{ width: '60%' }}>
+
+                                        </div>
+
+
+                                        <div style={{ width: '40%', border: '1px solid black', borderTop: 'none' }}>
+                                            <div style={{ width: '100%', display: 'flex' }}>
+                                                <div style={{ width: '70%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold' }}>Total amount </div>
+                                                <div style={{ width: '30%', backgroundColor: '#006CA5', display: 'flex', padding: '7px', fontSize: '14px', fontWeight: 'bold', borderLeft: '1px solid black' }}>
+                                                    {
+                                                        (+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots) * 50
+                                                        + 12000
+
+                                                        + (+contextFromPdf?.data?.whiteData?.singleSashSquareFoots * 2400)
+                                                        + (+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots * 1100)
+
+                                                        + (+contextFromPdf?.data?.whiteData?.twoSashSquareFoots * 2750)
+                                                        + (+contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots * 1700)
+                                                        + (+contextFromPdf?.data?.whiteData?.fixWindowSquareFoots * 1050)
+                                                        + (+contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots * 2400)
+                                                        + (+contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots * 2300)
+
+                                                        + (+contextFromPdf?.data?.whiteData?.doubleSashSquareFoots + +contextFromPdf?.data?.whiteData?.singleSashSquareFoots + +contextFromPdf?.data?.whiteData?.twoSashSquareFoots + +contextFromPdf?.data?.whiteData?.fixWindowSquareFoots + +contextFromPdf?.data?.whiteData?.openableVentilatorSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash80mmSquareFoots + +contextFromPdf?.data?.whiteData?.doubleSash60mmSquareFoots) * mm5()
+                                                    }
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </>
+                            }
 
                             {/* END */}
 
