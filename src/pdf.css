@@ -11,3 +11,11 @@
     width: 80%;
     height: 95%;
 }
+
+@media only screen and (max-width: 600px) {
+    .Main-pdf {
+        width: 100%;
+        
+    }
+  }
+  
