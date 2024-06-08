@@ -13,9 +13,13 @@ const Pdf = () => {
         return `${day}/${month}/${year}`;
     };
     useEffect(() => {
-        console.log('contextFromPdf', contextFromPdf)
+        onLoad()
 
-    }, [contextFromPdf])
+    }, [])
+
+    const onLoad = () => {
+        toPDF()
+    }
 
 
     function mm5() {
@@ -32,9 +36,9 @@ const Pdf = () => {
 
     return (
         <>
-            <div style={{ width: '1200px', display: 'flex', justifyContent: 'flex-end' }}>
+            {/* <div style={{ width: '1200px', display: 'flex', justifyContent: 'flex-end' }}>
                 <button onClick={() => { toPDF() }} style={{ padding: '16px' , fontWeight : 'bold', color: 'white', backgroundColor: 'darkblue', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '150px !important', borderRadius: '12px !important', cursor: 'pointer !important' , border : 'none' , outline : 'none' }}>Download</button>
-            </div>
+            </div> */}
             <div className="App">
 
                 <div ref={targetRef}>
