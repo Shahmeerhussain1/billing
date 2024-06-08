@@ -1,3 +1,4 @@
+
 .Main-pdf {
     width: 1297px;
     /* width: 100%; */
@@ -18,4 +19,10 @@
         
     }
   } */
-  
+  @media print {
+    .App {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+    }
+}
