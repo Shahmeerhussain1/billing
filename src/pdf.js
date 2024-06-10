@@ -1,8 +1,9 @@
-import React, { forwardRef, useEffect } from 'react'
+import React, { forwardRef, useEffect , useContext} from 'react'
 import './pdf.css'
 import { usePDF } from 'react-to-pdf';
 import { DataContext } from './context';
-import { useContext } from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 const Pdf = () => {
     let contextFromPdf = useContext(DataContext)
     const { toPDF, targetRef } = usePDF({ filename: `${contextFromPdf?.data?.name || 'recept'}.pdf` });
@@ -12,14 +13,14 @@ const Pdf = () => {
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
     };
-    useEffect(() => {
-        onLoad()
+    // useEffect(() => {
+    //     onLoad()
 
-    }, [])
+    // }, [])
 
-    const onLoad = () => {
-        toPDF()
-    }
+    // const onLoad = () => {
+    //     toPDF()
+    // }
 
 
     function mm5() {
@@ -32,16 +33,48 @@ const Pdf = () => {
             contextFromPdf?.data?.whiteData?.fivemmGlass?.fourHundred ? 410 :
                 contextFromPdf?.data?.whiteData?.fivemmGlass?.sevenHundred ? 700 : 0
     }
-
+    const printDocument = (elementId) => {
+        const input = document.getElementById(elementId);
+        // html2canvas(input)
+        //   .then((canvas) => {
+        //     const imgData = canvas.toDataURL('image/png');
+        //     const pdf = new jsPDF();
+        //     pdf.addImage(imgData, 'JPEG', 0, 0);
+        //     pdf.save("download.pdf");
+        //   })
+        //   .catch((error) => {
+        //     console.error('Error generating PDF', error);
+        //   });
+        const contentWidth = input.scrollWidth;
+        const contentHeight = input.scrollHeight;
+      
+        html2canvas(input, {
+          scale: 2, // Increase scale to improve image quality
+          useCORS: true // Enable CORS if loading images from external sources
+        }).then((canvas) => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF({
+            orientation: 'portrait',
+            unit: 'px',
+            format: [contentWidth, contentHeight]
+          });
+      
+          pdf.addImage(imgData, 'PNG', 0, 0, contentWidth, contentHeight);
+          pdf.save("download.pdf");
+        }).catch((error) => {
+          console.error('Error generating PDF', error);
+        });
+      };
 
     return (
         <>
-            {/* <div style={{ width: '1200px', display: 'flex', justifyContent: 'flex-end' }}>
-                <button onClick={() => { toPDF() }} style={{ padding: '16px' , fontWeight : 'bold', color: 'white', backgroundColor: 'darkblue', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '150px !important', borderRadius: '12px !important', cursor: 'pointer !important' , border : 'none' , outline : 'none' }}>Download</button>
-            </div> */}
+            <div style={{ width: '1200px', display: 'flex', justifyContent: 'flex-end' }}>
+                <button onClick={() => { printDocument('DivToPrint') }} style={{ padding: '16px' , fontWeight : 'bold', color: 'white', backgroundColor: 'darkblue', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '150px !important', borderRadius: '12px !important', cursor: 'pointer !important' , border : 'none' , outline : 'none' }}>Download</button>
+            </div>
             <div className="App">
 
-                <div ref={targetRef}>
+                {/* <div id='DivToPrint' ref={targetRef}> */}
+                <div id="DivToPrint" >
 
                     <div className='Main-pdf'>
                         <div className='Main-sub-pdf'>
