@@ -68,7 +68,7 @@ const Pdf = () => {
 
     return (
         <>
-            <div style={{ width: '1000px', display: 'flex', justifyContent: 'flex-end' }}>
+            <div style={{ width: '900px', display: 'flex', justifyContent: 'flex-end' }}>
                 <button onClick={() => { printDocument('DivToPrint') }} style={{ padding: '16px' , fontWeight : 'bold', color: 'white', backgroundColor: 'darkblue', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '150px !important', borderRadius: '12px !important', cursor: 'pointer !important' , border : 'none' , outline : 'none' }}>Download</button>
             </div>
             <div className="App">
