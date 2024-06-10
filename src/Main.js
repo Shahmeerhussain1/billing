@@ -383,7 +383,7 @@ const handleButtonClick = () => {
          </div>
        } 
         <div className='main-checkbox'>
-         <input type='checkbox' value={context?.data?.whiteData?.singleSash} onChange={() => { context?.setData({ ...context?.data, whiteData :{ ...context?.data?.whiteData ,  singleSash: !context?.data?.whiteData?.singleSash }}) }} />
+         <input type='checkbox' value={context?.data?.whiteData?.singleSash} onChange={() => { context?.setData({ ...context?.data, whiteData :{ ...context?.data?.whiteData ,  doubleSash80mm: !context?.data?.whiteData?.doubleSash80mm }}) }} />
          <span>Double sash sliding window with net ( 80mm frame and 55mm sash )</span>
        </div>
        {
