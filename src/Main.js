@@ -224,7 +224,7 @@ const handleButtonClick = () => {
           </div>
         } 
          <div className='main-checkbox'>
-          <input type='checkbox' value={context?.data?.blackData?.singleSash} onChange={() => { context?.setData({ ...context?.data, blackData :{ ...context?.data?.blackData ,  singleSash: !context?.data?.blackData?.singleSash }}) }} />
+          <input type='checkbox' value={context?.data?.blackData?.doubleSash80mm} onChange={() => { context?.setData({ ...context?.data, blackData :{ ...context?.data?.blackData ,  doubleSash80mm: !context?.data?.blackData?.doubleSash80mm }}) }} />
           <span>Double sash sliding window with net ( 80mm frame and 55mm sash )</span>
         </div>
         {
@@ -383,7 +383,7 @@ const handleButtonClick = () => {
          </div>
        } 
         <div className='main-checkbox'>
-         <input type='checkbox' value={context?.data?.whiteData?.singleSash} onChange={() => { context?.setData({ ...context?.data, whiteData :{ ...context?.data?.whiteData ,  doubleSash80mm: !context?.data?.whiteData?.doubleSash80mm }}) }} />
+         <input type='checkbox' value={context?.data?.whiteData?.doubleSash80mm} onChange={() => { context?.setData({ ...context?.data, whiteData :{ ...context?.data?.whiteData ,  doubleSash80mm: !context?.data?.whiteData?.doubleSash80mm }}) }} />
          <span>Double sash sliding window with net ( 80mm frame and 55mm sash )</span>
        </div>
        {
